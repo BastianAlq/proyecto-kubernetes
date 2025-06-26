@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: frontend:latest  # usuario-docker-hub/frontend:latest - en local no es necesario poer el usuario
+          imagePullPolicy: IfNotPresent #si no esta presente la descarga local, la busca remotamente
+          ports:
+            - containerPort: 80
+          env: #variable de entorno para enviarla al frontend
+          - name: MY_FRONTEND_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_FRONTEND_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP

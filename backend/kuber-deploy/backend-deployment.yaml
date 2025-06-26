@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: backend:latest  # img docker en local/externa
+          imagePullPolicy: Never #IfNotPresent #si no esta presente la descarga
+          ports:
+            - containerPort: 3000
+          env: #variable de entorno para enviarla al frontend
+          - name: MY_BACKEND_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_BACKEND_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
