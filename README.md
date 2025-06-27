@@ -22,7 +22,7 @@ Proyecto de prueba con:
 ```mermaid
 flowchart TB
 
-    subgraph Windows["🪟 Windows"]
+    subgraph Windows[" Windows"]
         subgraph WSL2["🐧 WSL2"]
             subgraph Minikube["🐳 Minikube - Single Node"]
 
@@ -57,11 +57,9 @@ flowchart TB
     backendService --> pod4
 
 ```
-⚡️ Despliegue Rápido
+## ⚡️ Despliegue Rápido
 
 ```bash
-Copiar
-Editar
 # Iniciar cluster
 minikube start
 
