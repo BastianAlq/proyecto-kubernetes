@@ -55,8 +55,11 @@ flowchart TB
 
     backendService --> pod3
     backendService --> pod4
+
+```
 ⚡️ Despliegue Rápido
-bash
+
+```bash
 Copiar
 Editar
 # Iniciar cluster
@@ -74,3 +77,4 @@ kubectl apply -f backend/kuber-deploy/
 # Verificar estado
 kubectl get pods
 kubectl get services
+```
