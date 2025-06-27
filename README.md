@@ -1,21 +1,64 @@
-# Proyecto Kubernetes Local - Frontend + Backend
+# 🚀 Proyecto Kubernetes Local - Frontend + Backend
 
-![Diagrama de Arquitectura](./diagrams/arquitectura.png) *(opcional)*
+---
 
 ## 🔍 Descripción
 Proyecto de prueba con:
-- **Frontend**: Servidor Node.js (puerto 32000)
-- **Backend**: API Node.js (puerto 32001)
-- **Kubernetes**: Configuración local con Minikube
+- 🖥️ **Frontend**: Servidor Node.js 
+- 🔧 **Backend**: API Node.js
+- ☸️ **Kubernetes**: Configuración local con Minikube
+
+---
 
 ## ⚙️ Requisitos
-- Docker
-- Minikube (`minikube start`)
-- kubectl
+- 🐳 Docker
+- ☸️ Minikube (`minikube start`)
+- 🔧 kubectl
 
-## 🚀 Despliegue Rápido
+---
 
-```bash
+## 🏗️ Arquitectura
+
+```mermaid
+flowchart TB
+
+    subgraph Windows["🪟 Windows"]
+        subgraph WSL2["🐧 WSL2"]
+            subgraph Minikube["🐳 Minikube - Single Node"]
+
+                ingress["🌐 Ingress<br/>(http://&#8203;re-start.com)"]
+                frontendService["⚛️ Frontend Service<br/>(re-start.com/)"]
+                backendService["🛠️ Backend Service<br/>(re-start.com/api/random)"]
+
+                subgraph replicas_front["📦 ReplicaSet = 2"]
+                    pod1["📦 POD1<br/>(app-front)"]
+                    pod2["📦 POD2<br/>(app-front)"]
+                end
+
+
+                subgraph replicas_back["📦 ReplicaSet = 2"]
+                    pod3["📦 POD3<br/>(app-backend)"]
+                    pod4["📦 POD4<br/>(app-backend)"]
+                end
+
+            end
+        end
+    end
+
+    ingress --> frontendService
+
+    frontendService --> pod1
+    frontendService --> pod2
+
+    pod1 --> backendService
+    pod2 --> backendService
+
+    backendService --> pod3
+    backendService --> pod4
+⚡️ Despliegue Rápido
+bash
+Copiar
+Editar
 # Iniciar cluster
 minikube start
 
